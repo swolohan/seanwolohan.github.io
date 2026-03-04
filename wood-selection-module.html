@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choosing Wood for Greenwood Carving — Learning Module</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --ink: #1c1917;
+    --paper: #faf9f6;
+    --warm: #f5f0ea;
+    --mid: #a8a29e;
+    --accent: #4d7c0f;
+    --accent-dark: #365314;
+    --accent-light: #f0fdf4;
+    --amber: #92400e;
+    --amber-light: #fef3c7;
+    --rule: #d6d3d1;
+    --correct: #16a34a;
+    --incorrect: #dc2626;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Instrument Sans', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--sans);
+    background: #e8e5df;
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 24px 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* MODULE CONTAINER */
+  .module {
+    max-width: 720px;
+    width: 100%;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+    position: relative;
+  }
+
+  /* TOP BAR */
+  .module-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 24px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--warm);
+    font-size: 12px;
+  }
+  .module-bar .brand {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+  .module-bar .brand strong { color: var(--accent-dark); }
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .progress-track {
+    width: 120px;
+    height: 4px;
+    background: var(--rule);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .progress-text {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--mid);
+    min-width: 40px;
+  }
+
+  /* SCREENS */
+  .screen {
+    display: none;
+    padding: 40px 36px;
+    min-height: 480px;
+  }
+  .screen.active { display: block; }
+
+  .screen-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .screen h2 {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+  .screen h3 {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+  .screen p {
+    color: #44403c;
+    margin-bottom: 14px;
+  }
+
+  /* LEARNING OBJECTIVES */
+  .objectives {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+  .objectives h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 8px;
+  }
+  .objectives li {
+    font-size: 14px;
+    color: #44403c;
+    margin-bottom: 4px;
+    margin-left: 18px;
+  }
+
+  /* WOOD SPECIES CARDS */
+  .species-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .species-tab {
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--rule);
+    border-bottom: none;
+    background: var(--warm);
+    color: var(--mid);
+    transition: all 0.15s;
+    margin-bottom: -2px;
+  }
+  .species-tab:hover { color: var(--ink); }
+  .species-tab.active {
+    background: var(--paper);
+    color: var(--accent-dark);
+    border-color: var(--accent);
+    border-bottom: 2px solid var(--paper);
+  }
+
+  .species-card { display: none; }
+  .species-card.active { display: block; }
+
+  .species-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    gap: 20px;
+  }
+  .species-name {
+    font-family: var(--serif);
+    font-size: 22px;
+  }
+  .species-latin {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--mid);
+  }
+  .species-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid var(--accent);
+    color: var(--accent-dark);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .id-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .id-item {
+    background: var(--warm);
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+  .id-item .id-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 3px;
+    display: block;
+  }
+
+  .properties-bar {
+    display: flex;
+    gap: 16px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+  .prop {
+    flex: 1;
+    min-width: 100px;
+  }
+  .prop-label {
+    font-size: 11px;
+    color: var(--mid);
+    margin-bottom: 4px;
+  }
+  .prop-bar-track {
+    height: 8px;
+    background: var(--warm);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .prop-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 4px;
+  }
+  .prop-val {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent-dark);
+    margin-top: 2px;
+  }
+
+  .best-for {
+    background: var(--accent-light);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 14px;
+  }
+  .best-for strong {
+    color: var(--accent-dark);
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* CROSS SECTION ILLUSTRATIONS */
+  .cross-section-row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin: 16px 0;
+    padding: 16px;
+    background: var(--warm);
+    border: 1px solid var(--rule);
+  }
+  .cross-svg {
+    width: 140px;
+    height: 140px;
+    flex-shrink: 0;
+  }
+  .cross-caption {
+    flex: 1;
+    font-size: 13px;
+  }
+  .caption-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .caption-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    color: #57534e;
+    line-height: 1.8;
+  }
+  .caption-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 3px;
+  }
+  .caption-note {
+    font-size: 12px;
+    color: #78716c;
+    line-height: 1.6;
+    font-style: italic;
+  }
+  @media (max-width: 600px) {
+    .cross-section-row { flex-direction: column; align-items: center; }
+    .cross-svg { width: 160px; height: 160px; }
+  }
+
+  /* COMPARISON TABLE */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 16px 0;
+  }
+  .compare-table th {
+    background: var(--accent-dark);
+    color: white;
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 12px;
+  }
+  .compare-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .compare-table tr:nth-child(even) td {
+    background: var(--warm);
+  }
+
+  /* GREEN/SEASONED */
+  .split-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .split-box {
+    padding: 16px;
+    font-size: 13px;
+  }
+  .split-box.green {
+    background: var(--accent-light);
+    border: 1px solid var(--accent);
+  }
+  .split-box.seasoned {
+    background: var(--amber-light);
+    border: 1px solid var(--amber);
+  }
+  .split-box h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .split-box.green h4 { color: var(--accent-dark); }
+  .split-box.seasoned h4 { color: var(--amber); }
+  .split-box li {
+    margin-left: 16px;
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+
+  .tip-box {
+    background: var(--amber-light);
+    border-left: 3px solid var(--amber);
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .tip-box strong { color: var(--amber); }
+
+  /* MATCHING ACTIVITY */
+  .match-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .match-prompt {
+    background: var(--warm);
+    padding: 14px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 56px;
+  }
+  .match-prompt .emoji { font-size: 22px; }
+  .match-select {
+    display: flex;
+    align-items: center;
+  }
+  .match-select select {
+    width: 100%;
+    padding: 10px 12px;
+    font-family: var(--sans);
+    font-size: 13px;
+    border: 1px solid var(--rule);
+    background: white;
+    color: var(--ink);
+    appearance: auto;
+  }
+
+  /* QUIZ */
+  .quiz-question {
+    margin-bottom: 24px;
+  }
+  .quiz-q {
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 15px;
+  }
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .quiz-opt {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    border: 1px solid var(--rule);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.15s;
+    background: white;
+    gap: 10px;
+  }
+  .quiz-opt:hover { border-color: var(--accent); background: var(--accent-light); }
+  .quiz-opt.selected { border-color: var(--accent); background: var(--accent-light); font-weight: 500; }
+  .quiz-opt.correct { border-color: var(--correct); background: #f0fdf4; }
+  .quiz-opt.incorrect { border-color: var(--incorrect); background: #fef2f2; }
+  .quiz-opt .marker {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--rule);
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+  .quiz-opt.selected .marker { border-color: var(--accent); background: var(--accent); color: white; }
+  .quiz-opt.correct .marker { border-color: var(--correct); background: var(--correct); color: white; }
+  .quiz-opt.incorrect .marker { border-color: var(--incorrect); background: var(--incorrect); color: white; }
+
+  .quiz-feedback {
+    display: none;
+    padding: 12px 16px;
+    margin-top: 8px;
+    font-size: 13px;
+    border-radius: 4px;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: #f0fdf4; border-left: 3px solid var(--correct); color: #166534; }
+  .quiz-feedback.incorrect { background: #fef2f2; border-left: 3px solid var(--incorrect); color: #991b1b; }
+
+  /* NAV BUTTONS */
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 36px;
+    border-top: 1px solid var(--rule);
+    background: var(--warm);
+  }
+  .nav-btn {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 24px;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .nav-btn:hover { background: var(--ink); color: var(--paper); }
+  .nav-btn.primary { background: var(--accent-dark); color: white; border-color: var(--accent-dark); }
+  .nav-btn.primary:hover { background: var(--accent); }
+  .nav-btn:disabled { opacity: 0.3; cursor: default; }
+  .nav-btn:disabled:hover { background: var(--paper); color: var(--ink); }
+  .page-indicator {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--mid);
+  }
+
+  /* SUMMARY CHECKLIST */
+  .checklist {
+    list-style: none;
+    margin: 16px 0;
+  }
+  .checklist li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14px;
+    padding-left: 28px;
+    position: relative;
+  }
+  .checklist li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  /* REFLECTION */
+  .reflection {
+    background: var(--warm);
+    border: 1px solid var(--rule);
+    padding: 20px;
+    margin: 20px 0;
+  }
+  .reflection h4 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  .reflection p { font-size: 14px; color: #57534e; font-style: italic; }
+
+  hr.section-break {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 24px 0;
+  }
+
+  @media (max-width: 600px) {
+    .screen { padding: 28px 20px; }
+    .nav-bar { padding: 12px 20px; }
+    .id-grid, .split-compare, .match-grid { grid-template-columns: 1fr; }
+    .species-tab { padding: 6px 10px; font-size: 11px; }
+    .screen h2 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="module">
+
+  <!-- TOP BAR -->
+  <div class="module-bar">
+    <div class="brand"><strong>London Green Wood</strong> · Learning Module</div>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width: 0%;"></div></div>
+      <span class="progress-text" id="progressText">0%</span>
+    </div>
+  </div>
+
+  <!-- SCREEN 1: INTRO -->
+  <div class="screen active" data-screen="1">
+    <div class="screen-label">Module Introduction</div>
+    <h2>Choosing the Right Wood for Greenwood Carving</h2>
+    <p>The wood you choose shapes everything — how the blade moves, how the grain responds, whether the finished piece sings or fights you. Yet many carvers select wood based on whatever's available rather than what's ideal.</p>
+    <p>This module will help you identify, assess, and select the right wood species for your greenwood carving projects. You'll learn to read the characteristics that matter and match species to the work you want to do.</p>
+
+    <div class="objectives">
+      <h4>By the end of this module, you will be able to:</h4>
+      <ol>
+        <li>Identify six common UK species used in greenwood carving by their grain, colour, and bark</li>
+        <li>Explain how hardness, workability, and splitting behaviour affect carving</li>
+        <li>Distinguish freshly felled (green) wood from seasoned wood and assess readiness</li>
+        <li>Select the appropriate wood species for common carving projects</li>
+      </ol>
+    </div>
+
+    <div class="tip-box">
+      <strong>Estimated time:</strong> 15–20 minutes · 8 screens · Includes 2 knowledge checks
+    </div>
+  </div>
+
+  <!-- SCREEN 2: WHY WOOD CHOICE MATTERS -->
+  <div class="screen" data-screen="2">
+    <div class="screen-label">Section 1</div>
+    <h2>Why Wood Selection Matters</h2>
+    <p>In greenwood carving, you're working with freshly felled timber — wood that still holds its natural moisture. This is fundamentally different from dry woodworking. The species you choose determines:</p>
+
+    <div class="id-grid">
+      <div class="id-item">
+        <span class="id-label">Workability</span>
+        How easily the blade passes through. Some species carve like butter; others resist every cut.
+      </div>
+      <div class="id-item">
+        <span class="id-label">Splitting behaviour</span>
+        Whether the wood cleaves cleanly along the grain or tears unpredictably — critical for roughing out blanks.
+      </div>
+      <div class="id-item">
+        <span class="id-label">Finish quality</span>
+        How the surface responds to knife work. Fine-grained woods take beautiful tool finishes; coarse woods may need more work.
+      </div>
+      <div class="id-item">
+        <span class="id-label">Drying behaviour</span>
+        How the piece moves as it loses moisture. Some species warp dramatically; others stay stable.
+      </div>
+    </div>
+
+    <p>A common mistake is treating all wood as interchangeable. Choosing birch for a project that needs lime — or ash when you need cherry — means fighting the material instead of working with it.</p>
+
+    <div class="reflection">
+      <h4>Reflect</h4>
+      <p>Think about a past project where the wood didn't behave the way you expected. What would you do differently now?</p>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: SPECIES PROFILES -->
+  <div class="screen" data-screen="3">
+    <div class="screen-label">Section 2</div>
+    <h2>Common UK Species for Greenwood Carving</h2>
+    <p>Click each species tab below to explore its identification features, carving properties, and best uses.</p>
+
+    <div class="species-tabs">
+      <div class="species-tab active" onclick="showSpecies(this, 'sp-birch')">Birch</div>
+      <div class="species-tab" onclick="showSpecies(this, 'sp-lime')">Lime</div>
+      <div class="species-tab" onclick="showSpecies(this, 'sp-willow')">Willow</div>
+      <div class="species-tab" onclick="showSpecies(this, 'sp-cherry')">Cherry</div>
+      <div class="species-tab" onclick="showSpecies(this, 'sp-sycamore')">Sycamore</div>
+      <div class="species-tab" onclick="showSpecies(this, 'sp-ash')">Ash</div>
+    </div>
+
+    <!-- BIRCH -->
+    <div class="species-card active" id="sp-birch">
+      <div class="species-header">
+        <div><div class="species-name">Silver Birch</div><div class="species-latin">Betula pendula</div></div>
+        <div class="species-badge">Versatile</div>
+      </div>
+      <div class="cross-section-row">
+        <svg class="cross-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bark - white/silver papery -->
+          <circle cx="100" cy="100" r="95" fill="#d4cec4"/>
+          <circle cx="100" cy="100" r="95" fill="none" stroke="#e8e3db" stroke-width="8"/>
+          <circle cx="100" cy="100" r="91" fill="none" stroke="#f5f0e8" stroke-width="4"/>
+          <circle cx="100" cy="100" r="95" fill="none" stroke="#ccc5b8" stroke-width="1.5"/>
+          <!-- Dark diamond markings on bark -->
+          <path d="M15,80 l4,-6 l4,6 l-4,6z" fill="#5c544a" opacity="0.6"/>
+          <path d="M185,60 l3,-5 l3,5 l-3,5z" fill="#5c544a" opacity="0.5"/>
+          <path d="M30,140 l3,-5 l3,5 l-3,5z" fill="#5c544a" opacity="0.5"/>
+          <path d="M175,135 l3,-4 l3,4 l-3,4z" fill="#5c544a" opacity="0.4"/>
+          <!-- Sapwood - creamy white -->
+          <circle cx="100" cy="100" r="85" fill="#f2ead8"/>
+          <!-- Growth rings -->
+          <circle cx="100" cy="100" r="78" fill="none" stroke="#e5dbc8" stroke-width="0.7"/>
+          <circle cx="100" cy="100" r="70" fill="none" stroke="#e5dbc8" stroke-width="0.6"/>
+          <circle cx="100" cy="100" r="62" fill="none" stroke="#e5dbc8" stroke-width="0.7"/>
+          <circle cx="100" cy="100" r="54" fill="none" stroke="#e5dbc8" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="46" fill="none" stroke="#e5dbc8" stroke-width="0.7"/>
+          <circle cx="100" cy="100" r="38" fill="none" stroke="#e5dbc8" stroke-width="0.6"/>
+          <circle cx="100" cy="100" r="30" fill="none" stroke="#e5dbc8" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="22" fill="none" stroke="#e5dbc8" stroke-width="0.7"/>
+          <!-- Heartwood - slightly darker -->
+          <circle cx="100" cy="100" r="35" fill="#e8dcc4"/>
+          <circle cx="100" cy="100" r="28" fill="none" stroke="#ddd0b8" stroke-width="0.6"/>
+          <circle cx="100" cy="100" r="20" fill="none" stroke="#ddd0b8" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="12" fill="none" stroke="#ddd0b8" stroke-width="0.6"/>
+          <!-- Pith -->
+          <circle cx="100" cy="100" r="3" fill="#c8b898"/>
+          <!-- Medullary rays -->
+          <line x1="100" y1="15" x2="100" y2="185" stroke="#e8dcc8" stroke-width="0.4" opacity="0.5"/>
+          <line x1="15" y1="100" x2="185" y2="100" stroke="#e8dcc8" stroke-width="0.4" opacity="0.5"/>
+        </svg>
+        <div class="cross-caption">
+          <div class="caption-title">Cross Section</div>
+          <div class="caption-labels">
+            <span class="caption-dot" style="background:#f5f0e8;border:1px solid #ccc;"></span> White papery bark
+            <span class="caption-dot" style="background:#f2ead8;"></span> Creamy sapwood
+            <span class="caption-dot" style="background:#e8dcc4;"></span> Slightly darker heart
+          </div>
+          <div class="caption-note">Fine, even rings. Minimal heart/sap contrast. Look for dark diamond-shaped lenticels on the bark.</div>
+        </div>
+      </div>
+      <div class="id-grid">
+        <div class="id-item"><span class="id-label">Bark</span> Distinctive white/silver papery bark, peeling in horizontal strips. Dark diamond shapes on mature trees.</div>
+        <div class="id-item"><span class="id-label">Grain</span> Fine, even grain with subtle figure. Creamy white to pale brown. Heartwood slightly darker.</div>
+        <div class="id-item"><span class="id-label">Fresh scent</span> Mild, slightly sweet. Bark has wintergreen notes when scratched.</div>
+        <div class="id-item"><span class="id-label">Where to find it</span> Abundant across the UK. Coloniser species — common in mixed woodland, heaths, parks.</div>
+      </div>
+      <div class="properties-bar">
+        <div class="prop"><div class="prop-label">Hardness</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:55%"></div></div><div class="prop-val">Medium</div></div>
+        <div class="prop"><div class="prop-label">Workability</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:75%"></div></div><div class="prop-val">Good</div></div>
+        <div class="prop"><div class="prop-label">Splitting</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:70%"></div></div><div class="prop-val">Clean</div></div>
+      </div>
+      <div class="best-for"><strong>Best for →</strong> Spoons, kuksa cups, small bowls, spatulas. Excellent all-rounder for beginners.</div>
+    </div>
+
+    <!-- LIME -->
+    <div class="species-card" id="sp-lime">
+      <div class="species-header">
+        <div><div class="species-name">Lime (Linden)</div><div class="species-latin">Tilia × europaea</div></div>
+        <div class="species-badge">Carver's favourite</div>
+      </div>
+      <div class="cross-section-row">
+        <svg class="cross-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bark - grey-brown, shallow ridges -->
+          <circle cx="100" cy="100" r="95" fill="#8a7e72"/>
+          <circle cx="100" cy="100" r="95" fill="none" stroke="#7a6e62" stroke-width="2"/>
+          <!-- Bark texture ridges -->
+          <path d="M8,75 Q12,72 10,68" fill="none" stroke="#6e6358" stroke-width="1.5"/>
+          <path d="M190,85 Q187,80 191,77" fill="none" stroke="#6e6358" stroke-width="1.5"/>
+          <path d="M25,155 Q28,150 24,147" fill="none" stroke="#6e6358" stroke-width="1"/>
+          <path d="M170,40 Q173,36 169,33" fill="none" stroke="#6e6358" stroke-width="1"/>
+          <!-- Sapwood - very pale creamy white -->
+          <circle cx="100" cy="100" r="86" fill="#f7f0e2"/>
+          <!-- Growth rings - very fine and even -->
+          <circle cx="100" cy="100" r="82" fill="none" stroke="#efe6d4" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="77" fill="none" stroke="#efe6d4" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="72" fill="none" stroke="#efe6d4" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="67" fill="none" stroke="#efe6d4" stroke-width="0.3"/>
+          <circle cx="100" cy="100" r="62" fill="none" stroke="#efe6d4" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="57" fill="none" stroke="#efe6d4" stroke-width="0.3"/>
+          <circle cx="100" cy="100" r="52" fill="none" stroke="#efe6d4" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="47" fill="none" stroke="#efe6d4" stroke-width="0.3"/>
+          <circle cx="100" cy="100" r="42" fill="none" stroke="#efe6d4" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="37" fill="none" stroke="#efe6d4" stroke-width="0.3"/>
+          <circle cx="100" cy="100" r="32" fill="none" stroke="#efe6d4" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="27" fill="none" stroke="#efe6d4" stroke-width="0.3"/>
+          <circle cx="100" cy="100" r="22" fill="none" stroke="#efe6d4" stroke-width="0.4"/>
+          <!-- Heartwood - almost same colour, very minimal contrast -->
+          <circle cx="100" cy="100" r="38" fill="#f4ecdc"/>
+          <!-- Pith -->
+          <circle cx="100" cy="100" r="3" fill="#e0d4c0"/>
+          <!-- Very subtle rays -->
+          <line x1="100" y1="14" x2="100" y2="186" stroke="#f0e8d6" stroke-width="0.3" opacity="0.4"/>
+          <line x1="14" y1="100" x2="186" y2="100" stroke="#f0e8d6" stroke-width="0.3" opacity="0.4"/>
+        </svg>
+        <div class="cross-caption">
+          <div class="caption-title">Cross Section</div>
+          <div class="caption-labels">
+            <span class="caption-dot" style="background:#8a7e72;"></span> Grey-brown bark
+            <span class="caption-dot" style="background:#f7f0e2;"></span> Pale creamy-white
+            <span class="caption-dot" style="background:#f4ecdc;"></span> Heart barely differs
+          </div>
+          <div class="caption-note">Exceptionally fine, even grain — almost featureless. Minimal heart/sap contrast is a key identifier. The uniformity is what makes it ideal for detail work.</div>
+        </div>
+      </div>
+      <div class="id-grid">
+        <div class="id-item"><span class="id-label">Bark</span> Grey-brown, smooth when young, developing shallow ridges with age. Often covered in epicormic shoots.</div>
+        <div class="id-item"><span class="id-label">Grain</span> Very fine, even, almost featureless. Pale creamy-white throughout. Minimal colour difference heart/sap.</div>
+        <div class="id-item"><span class="id-label">Fresh scent</span> Faintly sweet, almost honey-like when freshly cut.</div>
+        <div class="id-item"><span class="id-label">Where to find it</span> Parks, avenues, churchyards. Less common in wild woodland but widely planted across the UK.</div>
+      </div>
+      <div class="properties-bar">
+        <div class="prop"><div class="prop-label">Hardness</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:30%"></div></div><div class="prop-val">Soft</div></div>
+        <div class="prop"><div class="prop-label">Workability</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:95%"></div></div><div class="prop-val">Excellent</div></div>
+        <div class="prop"><div class="prop-label">Splitting</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:45%"></div></div><div class="prop-val">Fair</div></div>
+      </div>
+      <div class="best-for"><strong>Best for →</strong> Detailed carving, relief work, figure carving, decorative spoons. The gold standard for fine detail work.</div>
+    </div>
+
+    <!-- WILLOW -->
+    <div class="species-card" id="sp-willow">
+      <div class="species-header">
+        <div><div class="species-name">Willow</div><div class="species-latin">Salix spp.</div></div>
+        <div class="species-badge">Lightweight</div>
+      </div>
+      <div class="cross-section-row">
+        <svg class="cross-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bark - deeply fissured grey-brown -->
+          <circle cx="100" cy="100" r="95" fill="#7a7068"/>
+          <circle cx="100" cy="100" r="95" fill="none" stroke="#6a6058" stroke-width="2.5"/>
+          <!-- Deep fissure marks -->
+          <path d="M6,60 L9,90 L5,120" fill="none" stroke="#584e46" stroke-width="2"/>
+          <path d="M194,55 L191,85 L195,115" fill="none" stroke="#584e46" stroke-width="2"/>
+          <path d="M60,6 L58,12" fill="none" stroke="#584e46" stroke-width="1.5"/>
+          <path d="M140,192 L138,186" fill="none" stroke="#584e46" stroke-width="1.5"/>
+          <path d="M30,178 L35,172" fill="none" stroke="#584e46" stroke-width="1.5"/>
+          <path d="M170,22 L165,28" fill="none" stroke="#584e46" stroke-width="1.5"/>
+          <!-- Sapwood - pinkish white -->
+          <circle cx="100" cy="100" r="84" fill="#f0e4d8"/>
+          <!-- Growth rings - wider spaced, soft wood -->
+          <circle cx="100" cy="100" r="78" fill="none" stroke="#e4d6c8" stroke-width="0.8"/>
+          <circle cx="100" cy="100" r="68" fill="none" stroke="#e4d6c8" stroke-width="0.6"/>
+          <circle cx="100" cy="100" r="58" fill="none" stroke="#e4d6c8" stroke-width="0.8"/>
+          <circle cx="100" cy="100" r="48" fill="none" stroke="#e4d6c8" stroke-width="0.6"/>
+          <circle cx="100" cy="100" r="38" fill="none" stroke="#e4d6c8" stroke-width="0.8"/>
+          <circle cx="100" cy="100" r="28" fill="none" stroke="#e4d6c8" stroke-width="0.6"/>
+          <circle cx="100" cy="100" r="18" fill="none" stroke="#e4d6c8" stroke-width="0.7"/>
+          <!-- Heartwood - pinkish brown -->
+          <circle cx="100" cy="100" r="40" fill="#e4d2c2"/>
+          <!-- Pith - often large in willow -->
+          <circle cx="100" cy="100" r="5" fill="#c8b4a0"/>
+          <!-- Subtle rays -->
+          <line x1="100" y1="16" x2="100" y2="184" stroke="#e8dace" stroke-width="0.3" opacity="0.4"/>
+          <line x1="16" y1="100" x2="184" y2="100" stroke="#e8dace" stroke-width="0.3" opacity="0.4"/>
+        </svg>
+        <div class="cross-caption">
+          <div class="caption-title">Cross Section</div>
+          <div class="caption-labels">
+            <span class="caption-dot" style="background:#7a7068;"></span> Fissured grey bark
+            <span class="caption-dot" style="background:#f0e4d8;"></span> Pale pinkish sapwood
+            <span class="caption-dot" style="background:#e4d2c2;"></span> Pinkish-brown heart
+          </div>
+          <div class="caption-note">Wide-spaced growth rings reflect fast growth. Large pith at centre. Pinkish tone is distinctive — and the wood feels noticeably light for its size.</div>
+        </div>
+      </div>
+      <div class="id-grid">
+        <div class="id-item"><span class="id-label">Bark</span> Deeply fissured grey-brown bark on mature trees. Younger branches smooth, often yellow or reddish.</div>
+        <div class="id-item"><span class="id-label">Grain</span> Light, soft, slightly fuzzy texture. White to pale pinkish-brown. Can be woolly when carved green.</div>
+        <div class="id-item"><span class="id-label">Fresh scent</span> Slightly bitter, aspirin-like (contains salicin).</div>
+        <div class="id-item"><span class="id-label">Where to find it</span> Riverbanks, wetlands, pond edges. Abundant near water across the UK. Often pollarded.</div>
+      </div>
+      <div class="properties-bar">
+        <div class="prop"><div class="prop-label">Hardness</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:20%"></div></div><div class="prop-val">Very soft</div></div>
+        <div class="prop"><div class="prop-label">Workability</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:70%"></div></div><div class="prop-val">Good (fuzzy)</div></div>
+        <div class="prop"><div class="prop-label">Splitting</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:50%"></div></div><div class="prop-val">Fair</div></div>
+      </div>
+      <div class="best-for"><strong>Best for →</strong> Quick practice spoons, large rough bowls, learning cuts. Forgiving for beginners but doesn't hold fine detail.</div>
+    </div>
+
+    <!-- CHERRY -->
+    <div class="species-card" id="sp-cherry">
+      <div class="species-header">
+        <div><div class="species-name">Wild Cherry</div><div class="species-latin">Prunus avium</div></div>
+        <div class="species-badge">Beautiful finish</div>
+      </div>
+      <div class="cross-section-row">
+        <svg class="cross-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bark - glossy reddish-brown with horizontal lenticels -->
+          <circle cx="100" cy="100" r="95" fill="#8b5e3c"/>
+          <circle cx="100" cy="100" r="95" fill="none" stroke="#7a5030" stroke-width="2"/>
+          <!-- Horizontal lenticel lines -->
+          <line x1="8" y1="50" x2="22" y2="49" stroke="#a07050" stroke-width="1.2"/>
+          <line x1="180" y1="65" x2="194" y2="64" stroke="#a07050" stroke-width="1"/>
+          <line x1="5" y1="110" x2="18" y2="111" stroke="#a07050" stroke-width="1.2"/>
+          <line x1="182" y1="130" x2="196" y2="129" stroke="#a07050" stroke-width="1"/>
+          <line x1="12" y1="150" x2="24" y2="151" stroke="#a07050" stroke-width="0.8"/>
+          <line x1="178" y1="45" x2="190" y2="44" stroke="#a07050" stroke-width="0.8"/>
+          <line x1="55" y1="6" x2="60" y2="8" stroke="#a07050" stroke-width="0.8"/>
+          <line x1="130" y1="192" x2="140" y2="194" stroke="#a07050" stroke-width="0.8"/>
+          <!-- Clearly defined sapwood ring - pale -->
+          <circle cx="100" cy="100" r="86" fill="#f0dcc4"/>
+          <!-- Heartwood - warm pinkish-brown, distinctive -->
+          <circle cx="100" cy="100" r="68" fill="#c4886a"/>
+          <!-- Growth rings in heartwood -->
+          <circle cx="100" cy="100" r="62" fill="none" stroke="#b87e60" stroke-width="0.7"/>
+          <circle cx="100" cy="100" r="55" fill="none" stroke="#b87e60" stroke-width="0.6"/>
+          <circle cx="100" cy="100" r="48" fill="none" stroke="#b87e60" stroke-width="0.7"/>
+          <circle cx="100" cy="100" r="41" fill="none" stroke="#b87e60" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="34" fill="none" stroke="#b87e60" stroke-width="0.6"/>
+          <circle cx="100" cy="100" r="27" fill="none" stroke="#b87e60" stroke-width="0.7"/>
+          <circle cx="100" cy="100" r="20" fill="none" stroke="#b87e60" stroke-width="0.5"/>
+          <!-- Growth rings in sapwood -->
+          <circle cx="100" cy="100" r="82" fill="none" stroke="#e4ccb0" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="76" fill="none" stroke="#e4ccb0" stroke-width="0.5"/>
+          <!-- Pith -->
+          <circle cx="100" cy="100" r="3" fill="#a06848"/>
+          <!-- Rays -->
+          <line x1="100" y1="14" x2="100" y2="186" stroke="#c89878" stroke-width="0.3" opacity="0.3"/>
+          <line x1="14" y1="100" x2="186" y2="100" stroke="#c89878" stroke-width="0.3" opacity="0.3"/>
+        </svg>
+        <div class="cross-caption">
+          <div class="caption-title">Cross Section</div>
+          <div class="caption-labels">
+            <span class="caption-dot" style="background:#8b5e3c;"></span> Glossy red-brown bark
+            <span class="caption-dot" style="background:#f0dcc4;"></span> Pale sapwood ring
+            <span class="caption-dot" style="background:#c4886a;"></span> Warm pinkish heart
+          </div>
+          <div class="caption-note">Sharp contrast between pale sapwood and rich heartwood is a key identifier. Horizontal lenticels on bark are distinctive. Colour deepens beautifully over time.</div>
+        </div>
+      </div>
+      <div class="id-grid">
+        <div class="id-item"><span class="id-label">Bark</span> Glossy, reddish-brown with distinctive horizontal lenticels (breathing pores). Peels in horizontal bands.</div>
+        <div class="id-item"><span class="id-label">Grain</span> Fine, straight grain. Warm pinkish-brown heartwood that deepens with age. Clearly defined sapwood ring.</div>
+        <div class="id-item"><span class="id-label">Fresh scent</span> Sweet, fruity, distinctive. Unmistakable once you've smelled it.</div>
+        <div class="id-item"><span class="id-label">Where to find it</span> Mixed deciduous woodland, hedgerows, gardens. Scattered but widespread across the UK.</div>
+      </div>
+      <div class="properties-bar">
+        <div class="prop"><div class="prop-label">Hardness</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:60%"></div></div><div class="prop-val">Medium</div></div>
+        <div class="prop"><div class="prop-label">Workability</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:80%"></div></div><div class="prop-val">Very good</div></div>
+        <div class="prop"><div class="prop-label">Splitting</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:65%"></div></div><div class="prop-val">Good</div></div>
+      </div>
+      <div class="best-for"><strong>Best for →</strong> Eating spoons, serving boards, decorative pieces. Gorgeous colour makes it a favourite for finished, display-quality work.</div>
+    </div>
+
+    <!-- SYCAMORE -->
+    <div class="species-card" id="sp-sycamore">
+      <div class="species-header">
+        <div><div class="species-name">Sycamore</div><div class="species-latin">Acer pseudoplatanus</div></div>
+        <div class="species-badge">Food-safe</div>
+      </div>
+      <div class="cross-section-row">
+        <svg class="cross-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bark - smooth grey, flaking to reveal pinkish patches -->
+          <circle cx="100" cy="100" r="95" fill="#9a9488"/>
+          <circle cx="100" cy="100" r="95" fill="none" stroke="#8a847a" stroke-width="2"/>
+          <!-- Flaking patches revealing orange-pink -->
+          <ellipse cx="15" cy="70" rx="8" ry="12" fill="#c4a088" opacity="0.6"/>
+          <ellipse cx="185" cy="120" rx="6" ry="10" fill="#c4a088" opacity="0.5"/>
+          <ellipse cx="40" cy="175" rx="7" ry="8" fill="#c4a088" opacity="0.4"/>
+          <ellipse cx="160" cy="30" rx="9" ry="7" fill="#c4a088" opacity="0.5"/>
+          <!-- Sapwood - pale creamy white, very consistent -->
+          <circle cx="100" cy="100" r="86" fill="#f5eddf"/>
+          <!-- Growth rings - fine -->
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#ece2d0" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="74" fill="none" stroke="#ece2d0" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="68" fill="none" stroke="#ece2d0" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="62" fill="none" stroke="#ece2d0" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="56" fill="none" stroke="#ece2d0" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="50" fill="none" stroke="#ece2d0" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="44" fill="none" stroke="#ece2d0" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="38" fill="none" stroke="#ece2d0" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="32" fill="none" stroke="#ece2d0" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="26" fill="none" stroke="#ece2d0" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="20" fill="none" stroke="#ece2d0" stroke-width="0.5"/>
+          <!-- Heartwood - very similar to sapwood -->
+          <circle cx="100" cy="100" r="38" fill="#f2e8d8"/>
+          <!-- Ripple/fiddleback figure hint -->
+          <line x1="62" y1="75" x2="138" y2="75" stroke="#e8dcc8" stroke-width="0.4" opacity="0.5"/>
+          <line x1="65" y1="85" x2="135" y2="85" stroke="#e8dcc8" stroke-width="0.3" opacity="0.4"/>
+          <line x1="60" y1="115" x2="140" y2="115" stroke="#e8dcc8" stroke-width="0.4" opacity="0.5"/>
+          <line x1="63" y1="125" x2="137" y2="125" stroke="#e8dcc8" stroke-width="0.3" opacity="0.4"/>
+          <!-- Pith -->
+          <circle cx="100" cy="100" r="3" fill="#ddd0bc"/>
+          <!-- Rays - more prominent in sycamore -->
+          <line x1="100" y1="14" x2="100" y2="186" stroke="#ece2d0" stroke-width="0.6" opacity="0.5"/>
+          <line x1="14" y1="100" x2="186" y2="100" stroke="#ece2d0" stroke-width="0.6" opacity="0.5"/>
+          <line x1="40" y1="25" x2="160" y2="175" stroke="#ece2d0" stroke-width="0.4" opacity="0.3"/>
+          <line x1="160" y1="25" x2="40" y2="175" stroke="#ece2d0" stroke-width="0.4" opacity="0.3"/>
+        </svg>
+        <div class="cross-caption">
+          <div class="caption-title">Cross Section</div>
+          <div class="caption-labels">
+            <span class="caption-dot" style="background:#9a9488;"></span> Grey bark, pink patches
+            <span class="caption-dot" style="background:#f5eddf;"></span> Pale creamy-white
+            <span class="caption-dot" style="background:#f2e8d8;"></span> Consistent colour
+          </div>
+          <div class="caption-note">Very uniform pale colour throughout — hard to distinguish heart from sap. May show rippled or fiddleback figure. Prominent medullary rays visible on cross-cut.</div>
+        </div>
+      </div>
+      <div class="id-grid">
+        <div class="id-item"><span class="id-label">Bark</span> Smooth and grey when young, flaking in irregular patches to reveal orange-pink underneath on mature trees.</div>
+        <div class="id-item"><span class="id-label">Grain</span> Fine, even, pale creamy-white. Can show rippled or fiddleback figure. Very consistent colour.</div>
+        <div class="id-item"><span class="id-label">Fresh scent</span> Mild, clean, almost odourless. Doesn't taint food — a key advantage.</div>
+        <div class="id-item"><span class="id-label">Where to find it</span> Everywhere. Naturalised across the UK. Woodland, parks, hedgerows, urban areas.</div>
+      </div>
+      <div class="properties-bar">
+        <div class="prop"><div class="prop-label">Hardness</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:60%"></div></div><div class="prop-val">Medium</div></div>
+        <div class="prop"><div class="prop-label">Workability</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:75%"></div></div><div class="prop-val">Good</div></div>
+        <div class="prop"><div class="prop-label">Splitting</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:60%"></div></div><div class="prop-val">Moderate</div></div>
+      </div>
+      <div class="best-for"><strong>Best for →</strong> Kitchen utensils, chopping boards, food scoops. The go-to for anything food-contact — no taste or odour transfer.</div>
+    </div>
+
+    <!-- ASH -->
+    <div class="species-card" id="sp-ash">
+      <div class="species-header">
+        <div><div class="species-name">Ash</div><div class="species-latin">Fraxinus excelsior</div></div>
+        <div class="species-badge">Strong & flexible</div>
+      </div>
+      <div class="cross-section-row">
+        <svg class="cross-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bark - pale grey with diamond-pattern ridges -->
+          <circle cx="100" cy="100" r="95" fill="#a09890"/>
+          <circle cx="100" cy="100" r="95" fill="none" stroke="#908880" stroke-width="2"/>
+          <!-- Diamond ridge pattern -->
+          <path d="M8,60 L12,54 L16,60 L12,66Z" fill="none" stroke="#787068" stroke-width="1"/>
+          <path d="M184,70 L188,64 L192,70 L188,76Z" fill="none" stroke="#787068" stroke-width="1"/>
+          <path d="M12,110 L16,104 L20,110 L16,116Z" fill="none" stroke="#787068" stroke-width="1"/>
+          <path d="M180,120 L184,114 L188,120 L184,126Z" fill="none" stroke="#787068" stroke-width="1"/>
+          <path d="M60,8 L64,4 L68,8 L64,12Z" fill="none" stroke="#787068" stroke-width="0.8"/>
+          <path d="M130,190 L134,186 L138,190 L134,194Z" fill="none" stroke="#787068" stroke-width="0.8"/>
+          <!-- Sapwood - pale cream -->
+          <circle cx="100" cy="100" r="86" fill="#f0e8d4"/>
+          <!-- Ring-porous growth rings - PROMINENT, key identifier -->
+          <circle cx="100" cy="100" r="80" fill="none" stroke="#d4c4a8" stroke-width="1.8"/>
+          <circle cx="100" cy="100" r="71" fill="none" stroke="#e0d2b8" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="68" fill="none" stroke="#d4c4a8" stroke-width="1.8"/>
+          <circle cx="100" cy="100" r="60" fill="none" stroke="#e0d2b8" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="56" fill="none" stroke="#d4c4a8" stroke-width="1.8"/>
+          <circle cx="100" cy="100" r="49" fill="none" stroke="#e0d2b8" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="45" fill="none" stroke="#d4c4a8" stroke-width="1.6"/>
+          <circle cx="100" cy="100" r="38" fill="none" stroke="#e0d2b8" stroke-width="0.5"/>
+          <circle cx="100" cy="100" r="34" fill="none" stroke="#d4c4a8" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="28" fill="none" stroke="#e0d2b8" stroke-width="0.4"/>
+          <circle cx="100" cy="100" r="24" fill="none" stroke="#d4c4a8" stroke-width="1.4"/>
+          <circle cx="100" cy="100" r="18" fill="none" stroke="#d4c4a8" stroke-width="1.2"/>
+          <!-- Heartwood - light brown, slightly distinct -->
+          <circle cx="100" cy="100" r="40" fill="#e4d8c0"/>
+          <!-- Pith -->
+          <circle cx="100" cy="100" r="3" fill="#c0b090"/>
+          <!-- Rays -->
+          <line x1="100" y1="14" x2="100" y2="186" stroke="#e0d4c0" stroke-width="0.4" opacity="0.4"/>
+          <line x1="14" y1="100" x2="186" y2="100" stroke="#e0d4c0" stroke-width="0.4" opacity="0.4"/>
+        </svg>
+        <div class="cross-caption">
+          <div class="caption-title">Cross Section</div>
+          <div class="caption-labels">
+            <span class="caption-dot" style="background:#a09890;"></span> Pale grey, diamond bark
+            <span class="caption-dot" style="background:#f0e8d4;"></span> Cream sapwood
+            <span class="caption-dot" style="background:#d4c4a8;border:1px solid #c0b498;"></span> Bold ring-porous rings
+          </div>
+          <div class="caption-note">Coarse, ring-porous grain with very prominent growth rings — the boldest of any species here. Each ring shows a dense earlywood band. This visible grain pattern makes ash unmistakable.</div>
+        </div>
+      </div>
+      <div class="id-grid">
+        <div class="id-item"><span class="id-label">Bark</span> Pale grey, smooth when young, developing diamond-pattern ridges. Black buds are a key identifier in winter.</div>
+        <div class="id-item"><span class="id-label">Grain</span> Coarse, ring-porous with prominent growth rings. Pale cream to light brown. Very visible grain pattern.</div>
+        <div class="id-item"><span class="id-label">Fresh scent</span> Mild, slightly musty. Less distinctive than cherry or birch.</div>
+        <div class="id-item"><span class="id-label">Where to find it</span> Common in woodland, hedgerows. Declining due to ash dieback — use responsibly from managed sources.</div>
+      </div>
+      <div class="properties-bar">
+        <div class="prop"><div class="prop-label">Hardness</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:75%"></div></div><div class="prop-val">Hard</div></div>
+        <div class="prop"><div class="prop-label">Workability</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:50%"></div></div><div class="prop-val">Moderate</div></div>
+        <div class="prop"><div class="prop-label">Splitting</div><div class="prop-bar-track"><div class="prop-bar-fill" style="width:90%"></div></div><div class="prop-val">Excellent</div></div>
+      </div>
+      <div class="best-for"><strong>Best for →</strong> Tool handles, chair parts, tent pegs, anything needing strength and flexibility. Splits beautifully for cleaving.</div>
+    </div>
+  </div>
+
+  <!-- SCREEN 4: PROPERTIES DEEP DIVE -->
+  <div class="screen" data-screen="4">
+    <div class="screen-label">Section 3</div>
+    <h2>Properties That Matter for Carving</h2>
+    <p>When assessing any piece of wood for carving, focus on these three key properties:</p>
+
+    <h3>Hardness</h3>
+    <p>How resistant the wood is to your blade. Softer woods (lime, willow) are easier to carve but may dent in use. Harder woods (ash, cherry) require sharper tools and more effort but produce durable pieces. For greenwood carving, hardness is relative — even "hard" species are significantly easier to work green than seasoned.</p>
+
+    <hr class="section-break">
+
+    <h3>Workability</h3>
+    <p>How cleanly the wood responds to edge tools. This depends on grain structure, not just hardness. Lime is soft <em>and</em> clean-cutting. Willow is soft but can be fuzzy and woolly. The best test is a single paring cut with a sharp knife — if the shaving curls cleanly, you've got good workability.</p>
+
+    <hr class="section-break">
+
+    <h3>Splitting Behaviour</h3>
+    <p>How the wood responds to being cleaved along the grain. This matters because most greenwood projects start with splitting a log into blanks. Ash splits beautifully along straight grain. Lime can be unpredictable. Understanding splitting behaviour saves time and waste.</p>
+
+    <div class="tip-box">
+      <strong>Pro tip —</strong> Always test a small section first. Even within the same species, individual trees vary based on growing conditions, age, and stress. A twisted birch from a windy hillside will behave very differently from a straight one in sheltered woodland.
+    </div>
+
+    <table class="compare-table">
+      <tr><th>Species</th><th>Hardness</th><th>Workability</th><th>Splitting</th><th>Best Starter Project</th></tr>
+      <tr><td><strong>Birch</strong></td><td>Medium</td><td>Good</td><td>Clean</td><td>Everyday spoon</td></tr>
+      <tr><td><strong>Lime</strong></td><td>Soft</td><td>Excellent</td><td>Fair</td><td>Carved figure</td></tr>
+      <tr><td><strong>Willow</strong></td><td>Very soft</td><td>Good (fuzzy)</td><td>Fair</td><td>Practice spoon</td></tr>
+      <tr><td><strong>Cherry</strong></td><td>Medium</td><td>Very good</td><td>Good</td><td>Display spoon</td></tr>
+      <tr><td><strong>Sycamore</strong></td><td>Medium</td><td>Good</td><td>Moderate</td><td>Kitchen spatula</td></tr>
+      <tr><td><strong>Ash</strong></td><td>Hard</td><td>Moderate</td><td>Excellent</td><td>Mallet handle</td></tr>
+    </table>
+  </div>
+
+  <!-- SCREEN 5: GREEN VS SEASONED -->
+  <div class="screen" data-screen="5">
+    <div class="screen-label">Section 4</div>
+    <h2>Green Wood vs. Seasoned Wood</h2>
+    <p>Greenwood carving relies on working wood while it still contains its natural moisture. Understanding the difference between green and seasoned wood — and knowing how to assess what you've got — is essential.</p>
+
+    <div class="split-compare">
+      <div class="split-box green">
+        <h4>🌿 Freshly Felled (Green)</h4>
+        <ul>
+          <li>High moisture content (often 40–80%+)</li>
+          <li>Cuts easily — blade glides through</li>
+          <li>Shavings curl, feel damp</li>
+          <li>Wood feels heavy for its size</li>
+          <li>End grain may show visible moisture</li>
+          <li>Fresh scent when cut</li>
+          <li>Bark still firmly attached</li>
+        </ul>
+      </div>
+      <div class="split-box seasoned">
+        <h4>🪵 Seasoned (Dried)</h4>
+        <ul>
+          <li>Low moisture (12–20% for air-dried)</li>
+          <li>Harder to carve — more resistance</li>
+          <li>Shavings are brittle, snap or crumble</li>
+          <li>Wood feels lighter</li>
+          <li>May show end-grain checks (cracks)</li>
+          <li>Less scent</li>
+          <li>Bark loose or falling away</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>How to Assess Freshness</h3>
+    <p>When you're sourcing wood, use these quick tests:</p>
+    <div class="id-grid">
+      <div class="id-item"><span class="id-label">The thumbnail test</span> Press your thumbnail into the end grain. If it leaves an impression easily, the wood is likely still green.</div>
+      <div class="id-item"><span class="id-label">The weight test</span> Pick it up. Green wood is noticeably heavier than you'd expect for its size.</div>
+      <div class="id-item"><span class="id-label">The cut test</span> Make a small paring cut. Green wood produces curled, moist shavings. Dry wood makes dust or brittle chips.</div>
+      <div class="id-item"><span class="id-label">The end-grain check</span> Look at the ends. Deep radial cracks indicate significant drying. Surface checks only may mean it's still green inside.</div>
+    </div>
+
+    <div class="tip-box">
+      <strong>Timing matters —</strong> Most species are best carved within days to weeks of felling. If you can't carve immediately, seal the end grain with PVA glue or wax and store in a cool, shaded place. Bark-on logs hold moisture longer than split billets.
+    </div>
+  </div>
+
+  <!-- SCREEN 6: KNOWLEDGE CHECK 1 -->
+  <div class="screen" data-screen="6">
+    <div class="screen-label">Knowledge Check 1</div>
+    <h2>Test Your Understanding</h2>
+    <p>Let's see how well you've absorbed the material so far. Select the best answer for each question.</p>
+
+    <div class="quiz-question" id="q1">
+      <div class="quiz-q">1. You want to carve a detailed decorative figure with fine features. Which species would be most suitable?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="selectQuiz('q1', this, false)"><span class="marker"></span>Ash — it's strong and splits well</div>
+        <div class="quiz-opt" onclick="selectQuiz('q1', this, true)"><span class="marker"></span>Lime — excellent workability and holds fine detail</div>
+        <div class="quiz-opt" onclick="selectQuiz('q1', this, false)"><span class="marker"></span>Willow — it's the softest so it must be easiest</div>
+        <div class="quiz-opt" onclick="selectQuiz('q1', this, false)"><span class="marker"></span>Sycamore — it's food-safe</div>
+      </div>
+      <div class="quiz-feedback correct" id="q1-correct">That's right. Lime's fine, even grain and excellent workability make it the top choice for detailed carving. It's been the carver's go-to for centuries for exactly this reason.</div>
+      <div class="quiz-feedback incorrect" id="q1-incorrect">Not quite. While that species has its strengths, <strong>lime</strong> is the best choice here — its fine, even grain and excellent workability make it ideal for holding fine detail.</div>
+    </div>
+
+    <div class="quiz-question" id="q2">
+      <div class="quiz-q">2. What does it mean when your paring cut produces brittle chips instead of curled shavings?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="selectQuiz('q2', this, false)"><span class="marker"></span>The wood is a hardwood species</div>
+        <div class="quiz-opt" onclick="selectQuiz('q2', this, false)"><span class="marker"></span>Your knife needs sharpening</div>
+        <div class="quiz-opt" onclick="selectQuiz('q2', this, true)"><span class="marker"></span>The wood has dried out significantly</div>
+        <div class="quiz-opt" onclick="selectQuiz('q2', this, false)"><span class="marker"></span>You're cutting against the grain</div>
+      </div>
+      <div class="quiz-feedback correct" id="q2-correct">Exactly. Brittle chips or dust instead of curled shavings is a key indicator that the wood has lost significant moisture and is no longer "green." It'll be much harder to carve in this state.</div>
+      <div class="quiz-feedback incorrect" id="q2-incorrect">While those can be factors, the primary indicator here is that <strong>the wood has dried out</strong>. Green wood produces moist, curled shavings; seasoned wood makes brittle chips or dust.</div>
+    </div>
+
+    <div class="quiz-question" id="q3">
+      <div class="quiz-q">3. You're making a wooden spatula that will be used for cooking. Which species is the best choice and why?</div>
+      <div class="quiz-options">
+        <div class="quiz-opt" onclick="selectQuiz('q3', this, false)"><span class="marker"></span>Cherry — it has the most beautiful colour</div>
+        <div class="quiz-opt" onclick="selectQuiz('q3', this, false)"><span class="marker"></span>Birch — it's the best all-rounder</div>
+        <div class="quiz-opt" onclick="selectQuiz('q3', this, true)"><span class="marker"></span>Sycamore — it's food-safe with no taste or odour transfer</div>
+        <div class="quiz-opt" onclick="selectQuiz('q3', this, false)"><span class="marker"></span>Lime — it's the easiest to carve</div>
+      </div>
+      <div class="quiz-feedback correct" id="q3-correct">Spot on. Sycamore is the go-to for food-contact items because it doesn't transfer taste or odour. It also has good workability and produces a clean, pale finish.</div>
+      <div class="quiz-feedback incorrect" id="q3-incorrect">Not the best pick here. For cooking utensils, <strong>sycamore</strong> is the top choice because it's food-safe — no taste or odour transfer to food. That property matters more than aesthetics or ease of carving for kitchen use.</div>
+    </div>
+  </div>
+
+  <!-- SCREEN 7: MATCHING WOOD TO PROJECTS -->
+  <div class="screen" data-screen="7">
+    <div class="screen-label">Knowledge Check 2</div>
+    <h2>Match the Wood to the Project</h2>
+    <p>For each project below, select the most appropriate wood species. Think about which properties matter most for each use case.</p>
+
+    <div class="match-grid">
+      <div class="match-prompt"><span class="emoji">🥄</span> Eating spoon (daily use, beautiful finish)</div>
+      <div class="match-select"><select id="m1" class="match-dropdown"><option value="">Select species...</option><option value="cherry">Cherry</option><option value="ash">Ash</option><option value="willow">Willow</option><option value="lime">Lime</option><option value="sycamore">Sycamore</option><option value="birch">Birch</option></select></div>
+
+      <div class="match-prompt"><span class="emoji">🪑</span> Chair leg (needs strength & flexibility)</div>
+      <div class="match-select"><select id="m2" class="match-dropdown"><option value="">Select species...</option><option value="cherry">Cherry</option><option value="ash">Ash</option><option value="willow">Willow</option><option value="lime">Lime</option><option value="sycamore">Sycamore</option><option value="birch">Birch</option></select></div>
+
+      <div class="match-prompt"><span class="emoji">🗿</span> Carved figure with fine detail</div>
+      <div class="match-select"><select id="m3" class="match-dropdown"><option value="">Select species...</option><option value="cherry">Cherry</option><option value="ash">Ash</option><option value="willow">Willow</option><option value="lime">Lime</option><option value="sycamore">Sycamore</option><option value="birch">Birch</option></select></div>
+
+      <div class="match-prompt"><span class="emoji">🍳</span> Kitchen serving board</div>
+      <div class="match-select"><select id="m4" class="match-dropdown"><option value="">Select species...</option><option value="cherry">Cherry</option><option value="ash">Ash</option><option value="willow">Willow</option><option value="lime">Lime</option><option value="sycamore">Sycamore</option><option value="birch">Birch</option></select></div>
+
+      <div class="match-prompt"><span class="emoji">🔨</span> Practice spoon for a beginner</div>
+      <div class="match-select"><select id="m5" class="match-dropdown"><option value="">Select species...</option><option value="cherry">Cherry</option><option value="ash">Ash</option><option value="willow">Willow</option><option value="lime">Lime</option><option value="sycamore">Sycamore</option><option value="birch">Birch</option></select></div>
+    </div>
+
+    <div style="text-align: center; margin: 20px 0;">
+      <button class="nav-btn primary" onclick="checkMatching()">Check Answers</button>
+    </div>
+    <div id="match-result" style="display:none;"></div>
+  </div>
+
+  <!-- SCREEN 8: SUMMARY -->
+  <div class="screen" data-screen="8">
+    <div class="screen-label">Module Summary</div>
+    <h2>What You've Learned</h2>
+    <p>You've now built a working framework for selecting the right wood for your greenwood carving projects. Here's what you can take away:</p>
+
+    <ul class="checklist">
+      <li>Six common UK species — birch, lime, willow, cherry, sycamore, and ash — each with distinct identification features and carving properties</li>
+      <li>The three key properties for assessing any carving wood: hardness, workability, and splitting behaviour</li>
+      <li>How to tell green wood from seasoned wood using the thumbnail, weight, cut, and end-grain tests</li>
+      <li>How to match species to project requirements based on intended use, not just availability</li>
+    </ul>
+
+    <div class="reflection">
+      <h4>Next Steps</h4>
+      <p>On your next walk through woodland or visit to a timber yard, try identifying at least two species by their bark and grain alone. Then make a small test cut to assess workability before committing to a project. The more you practice reading wood, the more intuitive your selection will become.</p>
+    </div>
+
+    <hr class="section-break">
+
+    <div style="text-align: center; padding: 20px 0;">
+      <p style="font-family: var(--serif); font-size: 20px; font-style: italic; color: var(--ink); margin-bottom: 8px;">Thank you for completing this module.</p>
+      <p style="font-size: 13px; color: var(--mid);">Designed by Sean Wolohan · London Green Wood</p>
+    </div>
+  </div>
+
+  <!-- NAV BAR -->
+  <div class="nav-bar">
+    <button class="nav-btn" id="prevBtn" onclick="navigate(-1)" disabled>← Previous</button>
+    <span class="page-indicator" id="pageIndicator">1 / 8</span>
+    <button class="nav-btn primary" id="nextBtn" onclick="navigate(1)">Next →</button>
+  </div>
+
+</div>
+
+<script>
+let currentScreen = 1;
+const totalScreens = 8;
+
+function navigate(dir) {
+  const next = currentScreen + dir;
+  if (next < 1 || next > totalScreens) return;
+  document.querySelector(`.screen[data-screen="${currentScreen}"]`).classList.remove('active');
+  currentScreen = next;
+  document.querySelector(`.screen[data-screen="${currentScreen}"]`).classList.add('active');
+  updateNav();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateNav() {
+  document.getElementById('prevBtn').disabled = currentScreen === 1;
+  document.getElementById('nextBtn').textContent = currentScreen === totalScreens ? 'Finish ✓' : 'Next →';
+  if (currentScreen === totalScreens) {
+    document.getElementById('nextBtn').onclick = () => {};
+    document.getElementById('nextBtn').style.opacity = '0.5';
+    document.getElementById('nextBtn').style.cursor = 'default';
+  } else {
+    document.getElementById('nextBtn').onclick = () => navigate(1);
+    document.getElementById('nextBtn').style.opacity = '1';
+    document.getElementById('nextBtn').style.cursor = 'pointer';
+  }
+  document.getElementById('pageIndicator').textContent = `${currentScreen} / ${totalScreens}`;
+  const pct = Math.round((currentScreen / totalScreens) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = pct + '%';
+}
+
+function showSpecies(tab, id) {
+  document.querySelectorAll('.species-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.species-card').forEach(c => c.classList.remove('active'));
+  tab.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+function selectQuiz(qId, el, isCorrect) {
+  const q = document.getElementById(qId);
+  if (q.dataset.answered) return;
+  q.dataset.answered = 'true';
+
+  q.querySelectorAll('.quiz-opt').forEach(o => o.style.pointerEvents = 'none');
+  if (isCorrect) {
+    el.classList.add('correct');
+    document.getElementById(qId + '-correct').classList.add('show');
+  } else {
+    el.classList.add('incorrect');
+    document.getElementById(qId + '-incorrect').classList.add('show');
+    q.querySelectorAll('.quiz-opt').forEach(o => {
+      const onclickAttr = o.getAttribute('onclick');
+      if (onclickAttr && onclickAttr.includes('true')) {
+        o.classList.add('correct');
+      }
+    });
+  }
+}
+
+function checkMatching() {
+  const answers = {
+    m1: 'cherry',
+    m2: 'ash',
+    m3: 'lime',
+    m4: 'sycamore',
+    m5: ['birch', 'willow']
+  };
+
+  let score = 0;
+  let total = 5;
+  const results = [];
+
+  for (let i = 1; i <= 5; i++) {
+    const val = document.getElementById('m' + i).value;
+    const correct = answers['m' + i];
+    const sel = document.getElementById('m' + i);
+    const isCorrect = Array.isArray(correct) ? correct.includes(val) : val === correct;
+
+    if (isCorrect) {
+      score++;
+      sel.style.borderColor = 'var(--correct)';
+      sel.style.background = '#f0fdf4';
+    } else {
+      sel.style.borderColor = 'var(--incorrect)';
+      sel.style.background = '#fef2f2';
+    }
+  }
+
+  const resultEl = document.getElementById('match-result');
+  resultEl.style.display = 'block';
+
+  const correctAnswers = `<div style="margin-top: 12px; font-size: 13px; color: #57534e;">
+    <strong>Best answers:</strong> 🥄 Cherry (beautiful finish, medium hardness) · 🪑 Ash (strong, flexible) · 🗿 Lime (fine detail) · 🍳 Sycamore (food-safe) · 🔨 Birch or Willow (forgiving for learning)
+  </div>`;
+
+  if (score >= 4) {
+    resultEl.innerHTML = `<div class="tip-box" style="border-left-color: var(--correct);"><strong style="color: var(--correct);">Excellent — ${score}/${total} correct!</strong> You've got a strong grasp of matching species to purpose.${correctAnswers}</div>`;
+  } else if (score >= 2) {
+    resultEl.innerHTML = `<div class="tip-box"><strong>${score}/${total} correct.</strong> Good effort — review the species profiles on screen 3 to strengthen your understanding of each wood's best use case.${correctAnswers}</div>`;
+  } else {
+    resultEl.innerHTML = `<div class="tip-box" style="border-left-color: var(--incorrect);"><strong style="color: var(--incorrect);">${score}/${total} correct.</strong> It's worth revisiting the species profiles. Focus on the "Best for" section of each card — that's where the key distinctions are.${correctAnswers}</div>`;
+  }
+}
+
+updateNav();
+</script>
+
+</body>
+</html>
