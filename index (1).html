@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sean Wolohan — Curriculum Designer</title>
+<meta name="description" content="Sean Wolohan — Curriculum designer for climate careers and green economy workforce development. London, UK.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Newsreader:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #14201a;
+  --ink-soft: #3a4a42;
+  --paper: #faf8f3;
+  --paper-warm: #f3efe6;
+  --line: #d9d2c4;
+  --line-soft: #e7e1d5;
+  --moss: #2f6b4f;
+  --moss-dark: #1f4d38;
+  --moss-light: #eef4ef;
+  --clay: #b06a3f;
+  --mid: #8a8275;
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Newsreader', Georgia, serif;
+  --mono: 'JetBrains Mono', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.wrap { max-width: 1000px; margin: 0 auto; padding: 0 48px; }
+
+/* ── INTRO REVEAL ── */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; animation: rise 0.9s cubic-bezier(0.16,1,0.3,1) forwards; }
+.d1 { animation-delay: 0.05s; }
+.d2 { animation-delay: 0.18s; }
+.d3 { animation-delay: 0.31s; }
+.d4 { animation-delay: 0.44s; }
+.d5 { animation-delay: 0.57s; }
+
+/* ── HERO ── */
+.hero {
+  padding: 96px 0 60px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.hero-kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin-bottom: 28px;
+}
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(40px, 6.5vw, 78px);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  margin-bottom: 32px;
+  max-width: 16ch;
+}
+.hero h1 .accent {
+  font-style: italic;
+  color: var(--moss-dark);
+}
+.hero-lede {
+  font-size: 21px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 54ch;
+  margin-bottom: 8px;
+}
+
+/* ── METRICS BAND ── */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--line);
+}
+.metric {
+  padding: 36px 0;
+  text-align: center;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+.metric:last-child { border-right: none; }
+.metric-num {
+  font-family: var(--display);
+  font-size: 46px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--moss-dark);
+  letter-spacing: -0.02em;
+}
+.metric-label {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-top: 10px;
+}
+
+/* ── NAV ── */
+.site-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(250,248,243,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1000px; margin: 0 auto;
+  padding: 0 48px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.nav-name {
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--mid); padding: 16px 0;
+}
+.nav-name strong { color: var(--ink); }
+.nav-links { display: flex; gap: 4px; list-style: none; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  font-weight: 500; color: var(--mid); text-decoration: none;
+  padding: 16px 14px; display: block;
+  border-bottom: 2px solid transparent; transition: all 0.2s;
+}
+.nav-links a:hover { color: var(--moss-dark); border-bottom-color: var(--moss); }
+
+/* ── SECTIONS ── */
+.section { padding: 80px 0; border-bottom: 1px solid var(--line); }
+.section-head { margin-bottom: 48px; }
+.section-label {
+  font-family: var(--mono);
+  font-size: 10.5px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--moss); margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400; line-height: 1.1; letter-spacing: -0.015em;
+  max-width: 20ch;
+}
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; align-items: start; }
+.about-text p { color: var(--ink-soft); margin-bottom: 18px; font-size: 18px; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-text a { color: var(--moss-dark); text-decoration: none; border-bottom: 1px solid var(--moss); }
+.about-text a:hover { background: var(--moss-light); }
+.about-side { border-left: 1px solid var(--line); padding-left: 32px; }
+.side-block { margin-bottom: 28px; }
+.side-block:last-child { margin-bottom: 0; }
+.side-heading {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--moss); margin-bottom: 8px;
+}
+.side-block p { font-size: 15px; color: var(--ink-soft); line-height: 1.55; }
+
+/* ── CASE STUDIES ── */
+.cases { display: flex; flex-direction: column; gap: 0; }
+.case {
+  border-top: 1px solid var(--line);
+  padding: 0;
+}
+.case:last-child { border-bottom: 1px solid var(--line); }
+.case-head {
+  padding: 32px 0;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 32px;
+  align-items: baseline;
+  transition: background 0.2s;
+}
+.case-head:hover { background: var(--paper-warm); }
+.case-num {
+  font-family: var(--mono);
+  font-size: 13px; color: var(--mid); padding-top: 6px;
+}
+.case-main { }
+.case-tag {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--moss); margin-bottom: 8px;
+}
+.case-title {
+  font-family: var(--display);
+  font-size: 27px; font-weight: 400; line-height: 1.15; letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+.case-meta { font-size: 15px; color: var(--mid); }
+.case-headline {
+  text-align: right;
+  align-self: center;
+}
+.case-headline .hl-num {
+  font-family: var(--display);
+  font-size: 34px; font-weight: 500; color: var(--moss-dark); line-height: 1;
+  letter-spacing: -0.02em;
+}
+.case-headline .hl-label {
+  font-family: var(--mono);
+  font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--mid); margin-top: 5px;
+}
+.case-toggle {
+  font-family: var(--display);
+  font-size: 28px; color: var(--moss); transition: transform 0.3s; line-height: 1;
+  align-self: center;
+}
+.case.open .case-toggle { transform: rotate(45deg); }
+.case-body { max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1); }
+.case.open .case-body { max-height: 900px; }
+.case-content {
+  padding: 0 0 40px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.case-col h4 {
+  font-family: var(--mono);
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--moss); margin-bottom: 12px;
+}
+.case-col p { font-size: 16px; color: var(--ink-soft); line-height: 1.6; }
+.case-col ul { list-style: none; padding: 0; }
+.case-col li {
+  font-size: 16px; color: var(--ink-soft); line-height: 1.55;
+  padding-left: 20px; position: relative; margin-bottom: 9px;
+}
+.case-col li::before {
+  content: '—'; position: absolute; left: 0; color: var(--moss); font-weight: 500;
+}
+
+/* ── MODULE SAMPLE ── */
+.demo-section {
+  background: var(--ink);
+  color: var(--paper);
+  border-bottom: none;
+}
+.demo-head { padding-bottom: 36px; }
+.demo-section .section-label { color: #7fc4a0; }
+.demo-section .section-title { color: var(--paper); }
+.demo-section .section-title em { font-style: italic; color: #7fc4a0; }
+.demo-lede { color: #b8c5be; max-width: 56ch; margin-top: 16px; font-size: 18px; }
+.demo-browser {
+  background: #1c2b23;
+  border-radius: 10px 10px 0 0;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  border: 1px solid #2a3d32;
+  border-bottom: none;
+}
+.demo-bar { display: flex; align-items: center; gap: 8px; padding: 12px 18px; background: #14201a; }
+.demo-dot { width: 11px; height: 11px; border-radius: 50%; }
+.demo-dot:nth-child(1) { background: #d96a52; }
+.demo-dot:nth-child(2) { background: #d9a94a; }
+.demo-dot:nth-child(3) { background: #5fa87a; }
+.demo-url { flex: 1; text-align: center; font-family: var(--mono); font-size: 11px; color: #6a7d72; }
+.demo-iframe { width: 100%; height: 620px; border: none; display: block; background: var(--paper); }
+.demo-open {
+  display: block; text-align: center; padding: 16px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  color: #b8c5be; text-decoration: none; background: #1c2b23;
+  border-radius: 0 0 10px 10px; border: 1px solid #2a3d32; border-top: none;
+  transition: color 0.2s;
+}
+.demo-open:hover { color: #7fc4a0; }
+
+/* ── CONTACT ── */
+.contact { text-align: center; padding: 96px 0; }
+.contact .section-label { display: flex; justify-content: center; }
+.contact h2 {
+  font-family: var(--display);
+  font-size: clamp(32px, 5vw, 52px); font-weight: 400; letter-spacing: -0.02em;
+  margin-bottom: 18px; line-height: 1.05;
+}
+.contact h2 em { font-style: italic; color: var(--moss-dark); }
+.contact p { color: var(--ink-soft); max-width: 50ch; margin: 0 auto 36px; font-size: 18px; }
+.contact-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  font-family: var(--mono);
+  font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500;
+  text-decoration: none; padding: 15px 32px;
+  border: 1px solid var(--ink); color: var(--ink); transition: all 0.2s;
+}
+.btn:hover { background: var(--ink); color: var(--paper); }
+.btn.primary { background: var(--moss-dark); border-color: var(--moss-dark); color: var(--paper); }
+.btn.primary:hover { background: var(--moss); border-color: var(--moss); }
+.contact-detail { margin-top: 28px; font-family: var(--mono); font-size: 11px; letter-spacing: 1px; color: var(--mid); }
+
+.foot { text-align: center; padding: 28px 0; font-family: var(--mono); font-size: 11px; color: var(--mid); }
+
+@media (max-width: 820px) {
+  .wrap { padding: 0 28px; }
+  .nav-inner { padding: 0 28px; }
+  .about-grid { grid-template-columns: 1fr; gap: 36px; }
+  .about-side { border-left: none; padding-left: 0; border-top: 1px solid var(--line); padding-top: 28px; }
+  .case-head { grid-template-columns: auto 1fr; gap: 18px; }
+  .case-headline { display: none; }
+  .case-content { grid-template-columns: 1fr; gap: 24px; }
+  .nav-links { display: none; }
+  .metric-num { font-size: 34px; }
+  .demo-iframe { height: 500px; }
+}
+@media (max-width: 480px) {
+  .hero { padding: 60px 0 44px; }
+  .metric { padding: 24px 0; }
+  .metric-num { font-size: 28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-kicker reveal d1">Sean Wolohan · Curriculum Designer</div>
+    <h1 class="reveal d2">Learning design that launches people into climate careers</h1>
+    <p class="hero-lede reveal d3">I build curricula that turn people with no prior experience into qualified clean-energy professionals — combining climate knowledge, practical skill, and community-centered learning for adults changing the direction of their working lives.</p>
+  </div>
+</header>
+
+<!-- METRICS -->
+<section class="metrics">
+  <div class="metric reveal d3">
+    <div class="metric-num">85%</div>
+    <div class="metric-label">Of initial cohort hired in 3 months</div>
+  </div>
+  <div class="metric reveal d4">
+    <div class="metric-num">700+</div>
+    <div class="metric-label">Learners reached annually</div>
+  </div>
+  <div class="metric reveal d5">
+    <div class="metric-num">270+</div>
+    <div class="metric-label">Hours of content built</div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <div class="nav-inner">
+    <div class="nav-name"><strong>Sean Wolohan</strong> · London</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#sample">Module Sample</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label">About</div>
+      <h2 class="section-title">Curriculum at the intersection of climate, community, and careers</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a curriculum designer at Generation, where my recent work transitioning and upskilling workers into climate careers has spanned every stage of the design process: research, scoping and sequencing, establishing aligned learning objectives and assessments, designing a blend of self-paced, live virtual, and in-person workshop content, and iterating based on learner feedback and industry input.</p>
+        <p>Working with subject matter experts like the Retrofit Academy, local government, and active retrofit contractors, I developed a comprehensive Retrofit Advisor course covering current government retrofit schemes, the realities of the climate crisis, and the role of inefficient home heating in fuel poverty. It was designed to prepare participants for accreditation exams, but more importantly for the on-the-job realities of supporting homeowners through the transition to more energy-efficient homes. Over 85% of the initial cohort were employed with green jobs employers within three months of graduation.</p>
+        <p>Throughout my career in education, one theme has become increasingly clear: learning is most effective when part of a vibrant, delightful, community-centered experience. I love to take dense, technical material and bring it to life, and to use technology as a tool that amplifies — but never replaces — the magic of a great teacher.</p>
+        <p>I also direct <a href="https://londongreenwood.com" target="_blank">London Green Wood</a>, a greenwood carving cooperative in East London, where I facilitate monthly community sessions for mixed-ability groups and oversee curriculum for seven courses reaching 700+ participants a year. Outside work I'm a climber, trail runner, and swimrun athlete drawn to wild places and the natural world. Through my own teaching fellowship at the University of Notre Dame, I saw firsthand what a cohort of people on a shared mission can do for a career — and it shaped how I think about learning, community, and what a fellowship can do.</p>
+      </div>
+      <aside class="about-side">
+        <div class="side-block">
+          <div class="side-heading">Curriculum Design</div>
+          <p>Needs analysis, backward design, learning objectives, scenario-based learning, assessment design, blended delivery, iterative improvement</p>
+        </div>
+        <div class="side-block">
+          <div class="side-heading">Facilitation</div>
+          <p>Live workshop facilitation, peer learning, mixed-ability adult groups, professional development design and delivery</p>
+        </div>
+        <div class="side-block">
+          <div class="side-heading">Climate & Green Economy</div>
+          <p>Energy efficiency and retrofit, heat pump technology, climate policy and finance, green jobs workforce development</p>
+        </div>
+        <div class="side-block">
+          <div class="side-heading">Tools</div>
+          <p>Canvas LMS, H5P, Google Slides, Notion, AI workflow tools</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-label">Case Studies</div>
+      <h2 class="section-title">Selected Work</h2>
+    </div>
+    <div class="cases">
+
+      <!-- CASE 1 -->
+      <article class="case open">
+        <div class="case-head" onclick="toggleCase(this)">
+          <div class="case-num">01</div>
+          <div class="case-main">
+            <div class="case-tag">Climate Careers · Generation</div>
+            <h3 class="case-title">Retrofit Advisor Training Program</h3>
+            <div class="case-meta">10-week blended program · Lead Curriculum Designer · <a href="https://uk.generation.org/programs/sustainability-project-officer/" target="_blank" style="color: var(--moss-dark); border-bottom: 1px solid var(--moss);" onclick="event.stopPropagation();">View program ↗</a></div>
+          </div>
+          <div class="case-headline">
+            <div class="hl-num">85%</div>
+            <div class="hl-label">Initial cohort hired · 3 months</div>
+          </div>
+          <div class="case-toggle">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-content">
+            <div class="case-col">
+              <h4>Challenge</h4>
+              <p>Millions of UK homes need energy-efficiency retrofitting, creating urgent demand for Retrofit Advisors — a role with no established training curriculum. The program needed to meet industry certification standards while preparing diverse adult learners for immediate employment.</p>
+            </div>
+            <div class="case-col">
+              <h4>Approach</h4>
+              <ul>
+                <li>Built the full curriculum from scratch: research, scoping, sequencing, objectives, and assessments</li>
+                <li>Collaborated with experts including the Retrofit Academy, local government, and active contractors</li>
+                <li>Integrated technical content, soft skills, and community-based learning</li>
+                <li>Designed role-play and case studies for client-relationship skills</li>
+                <li>Benchmarked assessments to industry accreditation standards</li>
+                <li>Tracked cohort data and facilitator feedback to iterate between cohorts</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 2 -->
+      <article class="case">
+        <div class="case-head" onclick="toggleCase(this)">
+          <div class="case-num">02</div>
+          <div class="case-main">
+            <div class="case-tag">Climate Careers · Generation</div>
+            <h3 class="case-title">Heat Pump Installer Training Program</h3>
+            <div class="case-meta">Ongoing development · Curriculum Designer</div>
+          </div>
+          <div class="case-headline">
+            <div class="hl-num">Live</div>
+            <div class="hl-label">Evolving standards</div>
+          </div>
+          <div class="case-toggle">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-content">
+            <div class="case-col">
+              <h4>Challenge</h4>
+              <p>The UK's push toward heat pump adoption requires a large workforce of qualified installers, but industry standards and certification requirements are evolving rapidly. The curriculum needed to keep pace with regulatory change while delivering practical, hands-on competency.</p>
+            </div>
+            <div class="case-col">
+              <h4>Approach</h4>
+              <ul>
+                <li>Tracked emerging UK energy policy and industry standards to keep content current</li>
+                <li>Managed scoping and sequencing aligned with certification requirements</li>
+                <li>Developed objectives and assessments with industry subject-matter experts</li>
+                <li>Integrated practical workshop components with online modules</li>
+                <li>Built modular frameworks enabling rapid updates as standards shifted</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- CASE 3 -->
+      <article class="case">
+        <div class="case-head" onclick="toggleCase(this)">
+          <div class="case-num">03</div>
+          <div class="case-main">
+            <div class="case-tag">Community Education · London Green Wood</div>
+            <h3 class="case-title">Greenwood Craft & Environmental Education</h3>
+            <div class="case-meta">Ongoing · Director & Facilitator</div>
+          </div>
+          <div class="case-headline">
+            <div class="hl-num">700+</div>
+            <div class="hl-label">Learners a year</div>
+          </div>
+          <div class="case-toggle">+</div>
+        </div>
+        <div class="case-body">
+          <div class="case-content">
+            <div class="case-col">
+              <h4>Context</h4>
+              <p>London Green Wood is a greenwood carving cooperative in East London bringing together makers, environmentalists, and craft enthusiasts. I direct the organization and oversee curriculum for seven courses reaching 700+ participants annually, generating over £60,000 in course revenue.</p>
+            </div>
+            <div class="case-col">
+              <h4>Facilitation Approach</h4>
+              <ul>
+                <li>Facilitate monthly community project days for mixed-skill-level groups</li>
+                <li>Structure sessions for peer learning between experienced and newer members</li>
+                <li>Adapt in real time to group dynamics, balancing instruction and collaboration</li>
+                <li>Connect craft practice to forestry, sustainability, and stewardship</li>
+                <li>Work with guest tutors to expand reach and content quality</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- MODULE SAMPLE -->
+<section class="section demo-section" id="sample">
+  <div class="wrap">
+    <div class="demo-head">
+      <div class="section-label">Module Sample</div>
+      <h2 class="section-title">An interactive module</h2>
+      <p class="demo-lede">A self-paced learning module I designed for London Green Wood. Move through it to see how I structure content, scaffold toward objectives, build knowledge checks, and design for self-directed learners.</p>
+    </div>
+    <div class="demo-browser">
+      <div class="demo-bar">
+        <div class="demo-dot"></div>
+        <div class="demo-dot"></div>
+        <div class="demo-dot"></div>
+        <div class="demo-url">wood-selection-module.html</div>
+      </div>
+      <iframe class="demo-iframe" src="wood-selection-module.html" title="Wood Selection Learning Module"></iframe>
+    </div>
+    <a class="demo-open" href="wood-selection-module.html" target="_blank">Open full module in new tab ↗</a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap contact">
+    <div class="section-label">Get in touch</div>
+    <h2>Let's build something <em>that matters</em></h2>
+    <p>I'm open to curriculum design and facilitation roles in climate, sustainability, and workforce development. Based in London, available across Western European and US time zones.</p>
+    <div class="contact-links">
+      <a class="btn primary" href="mailto:sean.p.wolohan@gmail.com">Email me</a>
+      <a class="btn" href="https://linkedin.com/in/seanwolohan" target="_blank">LinkedIn</a>
+    </div>
+    <div class="contact-detail">London, UK · M.Ed, University of Notre Dame</div>
+  </div>
+</section>
+
+<footer class="foot">© 2026 Sean Wolohan</footer>
+
+<script>
+function toggleCase(head) {
+  head.closest('.case').classList.toggle('open');
+}
+</script>
+</body>
+</html>
